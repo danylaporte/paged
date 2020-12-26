@@ -254,6 +254,20 @@ pub fn desc<T: Ord>(a: &T, b: &T) -> Ordering {
     b.cmp(&a)
 }
 
+/// Creates a comparer function that can be reversed using a flag.
+pub fn dyn_cmp<'a, C, T>(mut cmp: C, rev: bool) -> impl FnMut(&T, &T) -> Ordering + 'a
+where
+    C: FnMut(&T, &T) -> Ordering + 'a,
+{
+    move |a, b| {
+        if rev {
+            cmp(b, a)
+        } else {
+            cmp(a, b)
+        }
+    }
+}
+
 /// Creates a comparer function based on a key function.
 pub fn key_cmp<'a, F, K, T>(mut key: F) -> impl FnMut(&T, &T) -> Ordering + 'a
 where
