@@ -236,10 +236,10 @@ pub trait PagedIterExt: Iterator {
 
 impl<T> PagedIterExt for T where T: Iterator {}
 
-struct Page<T>(Vec<T>);
+pub struct Page<T>(Vec<T>);
 
 impl<T> Page<T> {
-    fn new(size: usize) -> Self {
+    pub fn new(size: usize) -> Self {
         Self(Vec::with_capacity(size))
     }
 
