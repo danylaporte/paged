@@ -15,7 +15,7 @@ where
 
 #[derive(Clone, Copy)]
 /// A Fn comparer
-pub struct FnComparer<C>(C);
+pub struct FnComparer<C>(pub C);
 
 impl<C, T> Comparer<T> for FnComparer<C>
 where
